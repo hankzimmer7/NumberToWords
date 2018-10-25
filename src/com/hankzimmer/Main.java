@@ -4,6 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
         numberToWords(1320);
+        System.out.println(reverse(-12));
     }
 
     //Takes in an integer number and print is as words
@@ -12,7 +13,7 @@ public class Main {
             System.out.println("Invalid Value");
         }
 
-        int processedNumber = reverseNumber(number);
+        int processedNumber = reverse(number);
         int digitsLeftToPrint = getDigitCount(number);
 
         int lastDigit;
@@ -62,11 +63,11 @@ public class Main {
     }
 
     // Reverse the number so that it will print out correctly, as it will be processed from right to left by the numberToWords method
-    public static int reverseNumber(int number) {
+    public static int reverse(int number) {
         int reverse = 0;
         int nextDigit;
         int processedNumber = number;
-        while (processedNumber >= 1) {
+        while (Math.abs(processedNumber) >= 1) {
             nextDigit = processedNumber % 10;
             reverse = reverse * 10 + nextDigit;
             processedNumber /= 10;
@@ -76,6 +77,12 @@ public class Main {
 
     // Get the digit count for the number, so that any trailing zeros will not be lost when it is reversed
     public static int getDigitCount(int number) {
+        if (number < 0) {
+            return -1;
+        }
+        if (number == 0) {
+            return 1;
+        }
         int digitCount = 0;
         int processedNumber = number;
         while (processedNumber >= 1) {
